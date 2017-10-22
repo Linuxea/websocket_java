@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>welcome</title>
+</head>
+<body>
+welcome to websocket!
+<input type="text" id = "content" />
+<input type="button" id="send" value="send" />
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script>
+    
+    var webSocket = new WebSocket("ws://localhost:8080/websocket");
+    webSocket.onopen = function () {
+        
+    }
+
+    webSocket.onmessage = function (resp) {
+        alert(resp.data);
+    }
+
+    $("#send").on("click", function () {
+        webSocket.send($("#content").val());
+    })
+
+    
+    webSocket.onclose = function () {
+        
+    }
+    
+</script>
+
+</body>
+</html>
