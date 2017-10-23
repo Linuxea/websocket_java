@@ -14,16 +14,17 @@ welcome to websocket!
     
     var webSocket = new WebSocket("ws://localhost:8080/websocket");
     webSocket.onopen = function () {
-        
-    }
+
+    };
 
     webSocket.onmessage = function (resp) {
-        alert(resp.data);
-    }
+//        alert(resp.data);
+        console.log(resp.data);
+    };
 
     $("#send").on("click", function () {
         webSocket.send($("#content").val());
-    })
+    });
 
     
     webSocket.onclose = function () {

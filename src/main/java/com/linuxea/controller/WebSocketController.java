@@ -9,6 +9,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Linuxea on 10/22/17.
@@ -34,9 +35,15 @@ public class WebSocketController {
     public void onMessage(String message){
         System.out.println(message);
         try {
-            String now = Instant.now().toString() ;
-            this.session.getBasicRemote().sendText(now + ":" + message);
+            while (true) {
+                // 建立 ws 连接并进行服务端的自主推送
+                String now = Instant.now().toString();
+                this.session.getBasicRemote().sendText(now + ":" + message);
+                TimeUnit.SECONDS.sleep(1);
+            }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
